@@ -1,0 +1,24 @@
+---
+- name: Setup web server
+  hosts: servera.lab.example.com
+  
+  tasks:
+    - name: Install httpd service
+      yum:
+        name: httpd
+        state: present
+    
+    - name: Install firewalld service
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Configure firewalld
+      firewalld:
+        service: httpd
+
+    - name: Services are started
+      service:
+        name: httpd
+        state: started
+        enabled: true
